@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The ultimate Instagram tool for downloading videos, generating hashtags, creating perfect bios, and more. Free, fast and no login required.">
+    <meta name="keywords" content="instagram video downloader, instagram downloader, instagram hashtag generator, instagram bio maker, download instagram videos, instagram tools, instagram helper">
+    <title>Insta Assistant Pro - Download Videos, Generate Tags & Bios</title>
+    <style>
+        :root {
+            --primary: #ff3366;
+            --secondary: #6633ff;
+            --dark: #212121;
+            --light: #f5f5f5;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --card-bg: #ffffff;
+            --border-radius: 12px;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('/api/placeholder/800/200') center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 50px 0 30px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .main {
+            padding: 40px 0;
+        }
+        
+        .tab-container {
+            margin-bottom: 30px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tab-btn:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+        }
+        
+        .tab-content {
+            display: none;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.3s ease forwards;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.2);
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background: #e02e5c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.3);
+        }
+        
+        .result-area {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: var(--border-radius);
+            border: 1px dashed #ddd;
+        }
+        
+        .result-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-copy {
+            background: var(--secondary);
+        }
+        
+        .btn-copy:hover {
+            background: #5528e0;
+            box-shadow: 0 5px 15px rgba(102, 51, 255, 0.3);
+        }
+        
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: var(--success);
+            color: white;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 51, 102, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon svg {
+            color: var(--primary);
+            width: 30px;
+            height: 30px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .steps {
+            counter-reset: step;
+            margin: 40px 0;
+        }
+        
+        .step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .step-number::before {
+            counter-increment: step;
+            content: counter(step);
+        }
+        
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 20px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: #eee;
+        }
+        
+        .video-preview {
+            margin-top: 20px;
+            width: 100%;
+            max-height: 500px;
+            border-radius: var(--border-radius);
+            object-fit: contain;
+            display: none;
+        }
+        
+        .ad-banner {
+            width: 100%;
+            height: 120px;
+            background: #f0f0f0;
+            margin: 30px 0;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .tag-output, .bio-output {
+            max-height: 200px;
+            overflow-y: auto;
+            word-break: break-word;
+        }
+        
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .tag {
+            background: rgba(102, 51, 255, 0.1);
+            color: var(--secondary);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <circle cx="18" cy="6" r="1.5"></circle>
+                        </svg>
+                    </div>
+                    <div class="logo-text">Insta Assistant Pro</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="activateTab('downloader')">Video Downloader</a></li>
+                        <li><a href="#" onclick="activateTab('tags')">Tag Generator</a></li>
+                        <li><a href="#" onclick="activateTab('bio')">Bio Creator</a></li>
+                        <li><a href="#" onclick="activateTab('features')">Features</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="hero">
+                <h1>The Ultimate Insta Toolkit</h1>
+                <p>Download videos, generate perfect hashtags, create engaging bios, and more - all in one place!</p>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main">
+        <div class="container">
+            <div class="tab-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="downloader">Video Downloader</button>
+                    <button class="tab-btn" data-tab="tags">Hashtag Generator</button>
+                    <button class="tab-btn" data-tab="bio">Bio Creator</button>
+                    <button class="tab-btn" data-tab="features">Features</button>
+                </div>
+                
+                <div id="downloader" class="tab-content active">
+                    <h2>Download Instagram Videos in Seconds</h2>
+                    <p>Paste the Instagram video URL to download high-quality videos directly to your device.</p>
+                    
+                    <div class="form-group">
+                        <label for="video-url">Instagram Video URL</label>
+                        <input type="text" id="video-url" placeholder="https://www.instagram.com/p/AbCdEfGhIjK/">
+                    </div>
+                    
+                    <button id="download-btn" onclick="processVideo()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download Video
+                    </button>
+                    
+                    <div class="result-area" id="video-result" style="display:none;">
+                        <h3>Your Video is Ready!</h3>
+                        <video id="video-preview" class="video-preview" controls></video>
+                        <div class="result-actions">
+                            <button id="save-video-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Save to Device
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="tags" class="tab-content">
+                    <h2>Instagram Hashtag Generator</h2>
+                    <p>Create the perfect set of hashtags to increase your reach and engagement.</p>
+                    
+                    <div class="form-group">
+                        <label for="tag-topic">What's your post about?</label>
+                        <input type="text" id="tag-topic" placeholder="e.g., travel, food, fitness, fashion...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tag-count">Number of hashtags</label>
+                        <select id="tag-count">
+                            <option value="5">5 hashtags</option>
+                            <option value="10">10 hashtags</option>
+                            <option value="15" selected>15 hashtags</option>
+                            <option value="20">20 hashtags</option>
+                            <option value="30">30 hashtags</option>
+                        </select>
+                    </div>
+                    
+                    <button id="generate-tags-btn" onclick="generateTags()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                        </svg>
+                        Generate Hashtags
+                    </button>
+                    
+                    <div class="result-area" id="tag-result" style="display:none;">
+                        <h3>Your Custom Hashtags</h3>
+                        <div class="tag-output" id="tag-output"></div>
+                        <div class="tag-container" id="tag-container"></div>
+                        <div class="result-actions">
+                            <button class="btn-copy" onclick="copyTags()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                Copy All Hashtags
+                            </button>
+                        </div>
+                        <div class="success-message" id="tag-copy-success">Hashtags copied to clipboard!</div>
+                    </div>
+                </div>
+                
+                <div id="bio" class="tab-content">
+                    <h2>Instagram Bio Creator</h2>
+                    <p>Create a captivating Instagram bio that perfectly represents your brand or personality.</p>
+                    
+                    <div class="form-group">
+                        <label for="bio-type">Bio Type</label>
+                        <select id="bio-type">
+                            <option value="personal">Personal</option>
+                            <option value="business">Business</option>
+                            <option value="creator">Creator/Influencer</option>
+                            <option value="minimalist">Minimalist</option>
+                            <option value="funny">Funny/Quirky</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio-keywords">Keywords (separated by commas)</label>
+                        <input type="text" id="bio-keywords" placeholder="e.g., travel, photography, foodie, fitness...">
+                    </div>
+                    
+                    <button id="generate-bio-btn" onclick="generateBio()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                        </svg>
+                        Create Bio
+                    </button>
+                    
+                    <div class="result-area" id="bio-result" style="display:none;">
+                        <h3>Your Perfect Instagram Bio</h3>
+                        <div class="bio-output" id="bio-output"></div>
+                        <div class="result-actions">
+                            <button class="btn-copy" onclick="copyBio()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                Copy Bio
+                            </button>
+                        </div>
+                        <div class="success-message" id="bio-copy-success">Bio copied to clipboard!</div>
+                    </div>
+                </div>
+                
+                <div id="features" class="tab-content">
+                    <h2>Why Choose Instagram Assistant Pro?</h2>
+                    <p>Our all-in-one Instagram toolkit offers everything you need to succeed on Instagram.</p>
+                    
+                    <div class="features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                            </div>
+                            <h3>High-Quality Downloads</h3>
+                            <p>Download Instagram videos in the highest available quality with just a few clicks, no login required.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                                    <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                                </svg>
+                            </div>
+                            <h3>Smart Hashtag Generator</h3>
+                            <p>Generate trending and relevant hashtags that increase your reach and engagement with our intelligent algorithm.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                </svg>
+                            </div>
+                            <h3>Bio Creator</h3>
+                            <p>Create attention-grabbing bios that perfectly represent your personality or brand identity.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="4 17 10 11 4 5"></polyline>
+                                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                                </svg>
+                            </div>
+                            <h3>User-Friendly Interface</h3>
+                            <p>Our clean, intuitive design makes it easy for anyone to use our tools, regardless of technical skills.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h3>100% Secure</h3>
+                            <p>We don't store your data or require any login or personal information to use our tools.</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                                </svg>
+                            </div>
+                            <h3>Free to Use</h3>
+                            <p>Access all our essential Instagram tools completely free, with no hidden fees or premium tiers.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ad-banner">
+                        Advertisement Space
+                    </div>
+                    
+                    <h2>How It Works</h2>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h3>Find the Instagram Content</h3>
+                                <p>Browse Instagram and find the video, reel, or post you want to download or generate hashtags for.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h3>Copy the URL</h3>
+                                <p>Tap the three dots on the post and select "Copy Link" or copy it from your browser's address bar.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h3>Paste and Process</h3>
+                                <p>Paste the URL into our downloader tool and click the button - it's that simple!</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number"></div>
+                            <div class="step-content">
+                                <h3>Download or Copy</h3>
+                                <p>Download your video or copy the generated hashtags and bio to use in your next post.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ad-banner">
+                Advertisement Space
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Instagram Assistant Pro</h3>
+                    <p>The ultimate Instagram toolkit for creators, influencers, and Instagram enthusiasts. Download videos, generate hashtags, create engaging bios and more!</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li><a href="#" onclick="activateTab('downloader')">Instagram Video Downloader</a></li>
+                        <li><a href="#" onclick="activateTab('tags')">Instagram Hashtag Generator</a></li>
+                        <li><a href="#" onclick="activateTab('bio')">Instagram Bio Creator</a></li>
+                        <li><a href="#">Instagram Story Viewer</a></li>
+                        <li><a href="#">Profile Analyzer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Instagram Growth Tips</a></li>
+                        <li><a href="#">Content Strategy Guide</a></li>
+                        <li><a href="#">Best Hashtags by Category</a></li>
+                        <li><a href="#">Instagram Algorithm Updates</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Instagram Assistant Pro. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                activateTab(tabId);
+            });
+        });
+        
+        function activateTab(tabId) {
+            // Update buttons
+            tabBtns.forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Update tab content
+            tabContents.forEach(content => {
+                if (content.id === tabId) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Scroll to top of tab content
+            document.getElementById(tabId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Instagram Video Downloader
+        function processVideo() {
+            const videoUrl = document.getElementById('video-url').value.trim();
+            if (!videoUrl) {
+                alert('Please enter an Instagram video URL');
+                return;
+            }
+            
+            if (!videoUrl.includes('instagram.com')) {
+                alert('Please enter a valid Instagram URL');
+                return;
+            }
+            
+            // In a real implementation, we would fetch the video from Instagram here
+            // For this demo, we'll simulate a success response
+            
+            document.getElementById('download-btn').innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"></path>
+                </svg>
+                Processing...
+            `;
+            
+            setTimeout(() => {
+                // For demonstration purposes, we'll use a placeholder video
+                const videoPreview = document.getElementById('video-preview');
+                videoPreview.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+                videoPreview.style.display = "block";
+                
+                document.getElementById('video-result').style.display = "block";
+                
+                document.getElementById('download-btn').innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download Video
+                `;
+                
+                // Scroll to result
+                document.getElementById('video-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 2000);
+        }
+        
+        // Hashtag Generator
+        function generateTags() {
+            const topic = document.getElementById('tag-topic').value.trim();
+            const count = parseInt(document.getElementById('tag-count').value);
+            
+            if (!topic) {
+                alert('Please enter a topic for your hashtags');
+                return;
+            }
+            
+            document.getElementById('generate-tags-btn').innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"></path>
+                </svg>
+                Generating...
+            `;
+            
+            setTimeout(() => {
+                // Generate hashtags based on the topic
+                let tags = [];
+                
+                // Add topic-related hashtags
+                const baseHashtags = {
+                    travel: ['travel', 'wanderlust', 'travelgram', 'instatravel', 'adventure', 'exploretheworld', 'travelphotography', 'traveladdict', 'globetrotter', 'travellife'],
+                    food: ['foodie', 'foodporn', 'foodgasm', 'instafood', 'foodstagram', 'delicious', 'yummy', 'homemade', 'healthyfood', 'foodlover'],
+                    fitness: ['fitness', 'gym', 'workout', 'fitnessmotivation', 'fitspo', 'healthylifestyle', 'training', 'strong', 'exercise', 'gains'],
+                    fashion: ['fashion', 'style', 'ootd', 'outfit', 'fashionista', 'streetstyle', 'instafashion', 'fashionblogger', 'stylish', 'trendy'],
+                    beauty: ['beauty', 'makeup', 'skincare', 'makeuptutorial', 'makeuplover', 'beautyblogger', 'natural', 'glam', 'makeupjunkie', 'cosmetics'],
+                    photography: ['photography', 'photooftheday', 'photographer', 'photoshoot', 'naturephotography', 'picoftheday', 'photogram', 'photoart', 'photodaily', 'shutterbug']
+                };
+                
+                // Find the closest match or use generic hashtags
+                let matchingCategory = null;
+                for (const category in baseHashtags) {
+                    if (topic.toLowerCase().includes(category)) {
+                        matchingCategory = category;
+                        break;
+                    }
+                }
+                
+                if (matchingCategory) {
+                    tags = [...baseHashtags[matchingCategory]];
+                }
+                
+                // Add generic popular hashtags
+                const popularHashtags = ['instagram', 'instagood', 'love', 'photooftheday', 'beautiful', 'happy', 'picoftheday', 'instadaily', 'followme', 'amazing'];
+                
+                // Add topic-specific tags
+                tags.push(topic.toLowerCase());
+                tags.push(topic.toLowerCase() + 'lover');
+                tags.push(topic.toLowerCase() + 'life');
+                tags.push('best' + topic.toLowerCase());
+                tags.push(topic.toLowerCase() + 'goals');
+                tags.push('daily' + topic.toLowerCase());
+                tags.push('instadaily' + topic.toLowerCase());
+                tags.push(topic.toLowerCase() + 'addict');
+                tags.push(topic.toLowerCase() + 'gram');
+                
+                // Mix with popular tags and get requested count
+                tags = [...new Set([...tags, ...popularHashtags])].slice(0, count);
+                
+                // Shuffle array
+                tags = tags.sort(() => 0.5 - Math.random());
+                
+                // Display hashtags
+                const tagOutput = document.getElementById('tag-output');
+                const tagContainer = document.getElementById('tag-container');
+                
+                tagOutput.innerHTML = tags.map(tag => `#${tag}`).join(' ');
+                tagContainer.innerHTML = '';
+                
+                tags.forEach(tag => {
+                    const tagElement = document.createElement('div');
+                    tagElement.classList.add('tag');
+                    tagElement.textContent = `#${tag}`;
+                    tagContainer.appendChild(tagElement);
+                });
+                
+                document.getElementById('tag-result').style.display = "block";
+                
+                document.getElementById('generate-tags-btn').innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
+                    </svg>
+                    Generate Hashtags
+                `;
+                
+                // Scroll to result
+                document.getElementById('tag-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 1500);
+        }
+        
+        // Bio Generator
+        function generateBio() {
+            const bioType = document.getElementById('bio-type').value;
+            const keywords = document.getElementById('bio-keywords').value.trim();
+            
+            if (!keywords) {
+                alert('Please enter keywords for your bio');
+                return;
+            }
+            
+            document.getElementById('generate-bio-btn').innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"></path>
+                </svg>
+                Creating...
+            `;
+            
+            setTimeout(() => {
+                const keywordsList = keywords.split(',').map(k => k.trim()).filter(k => k);
+                let bio = '';
+                
+                // Generate bio based on type and keywords
+                const emojis = {
+                    travel: ['✈️', '🌎', '🏝️', '🧳', '🗺️', '🌴', '🏞️', '🚗', '🧿', '🌍'],
+                    food: ['🍕', '🍔', '🍣', '🍩', '🍷', '🍝', '👨‍🍳', '🍰', '🍴', '☕'],
+                    fitness: ['💪', '🏋️‍♀️', '🧘‍♂️', '🏃‍♀️', '🥗', '🏆', '🚴‍♂️', '⚡', '🔥', '✨'],
+                    photography: ['📸', '📷', '🎞️', '👁️', '🌆', '🖼️', '📱', '🌅', '🎨', '✨'],
+                    music: ['🎵', '🎧', '🎸', '🎹', '🎤', '🎼', '🎻', '🥁', '🎙️', '🔊'],
+                    art: ['🎨', '🖌️', '🖼️', '✏️', '🧶', '📝', '🎭', '🎬', '✨', '📚']
+                };
+                
+                // Get relevant emojis
+                let relevantEmojis = [];
+                keywordsList.forEach(keyword => {
+                    for (const category in emojis) {
+                        if (keyword.toLowerCase().includes(category)) {
+                            relevantEmojis = [...relevantEmojis, ...emojis[category]];
+                        }
+                    }
+                });
+                
+                // If no specific emojis found, add some generic ones
+                if (relevantEmojis.length === 0) {
+                    relevantEmojis = ['✨', '💫', '❤️', '🌟', '📍', '🔥', '💭', '🙌', '💯', '⚡'];
+                }
+                
+                // Shuffle and pick a few emojis
+                relevantEmojis = relevantEmojis.sort(() => 0.5 - Math.random()).slice(0, 4);
+                
+                switch (bioType) {
+                    case 'personal':
+                        bio = `${relevantEmojis[0]} ${keywordsList[0]} enthusiast | ${keywordsList.length > 1 ? keywordsList[1] : 'Dreamer'} ${relevantEmojis[1]}\n`;
+                        bio += `Sharing my ${keywordsList.length > 2 ? keywordsList[2] : 'journey'} and ${keywordsList.length > 3 ? keywordsList[3] : 'adventures'} ${relevantEmojis[2]}\n`;
+                        bio += `"${inspirationalQuotes[Math.floor(Math.random() * inspirationalQuotes.length)]}" ${relevantEmojis[3]}`;
+                        break;
+                    case 'business':
+                        bio = `${relevantEmojis[0]} ${keywordsList[0]} ${keywordsList.length > 1 ? '| ' + keywordsList[1] : ''} ${relevantEmojis[1]}\n`;
+                        bio += `Helping you ${keywordsList.length > 2 ? keywordsList[2] : 'achieve your goals'} through ${keywordsList.length > 3 ? keywordsList[3] : 'innovative solutions'}\n`;
+                        bio += `📩 DM for inquiries or collaborations\n`;
+                        bio += `🔗 yourbusinesswebsite.com`;
+                        break;
+                    case 'creator':
+                        bio = `✨ Content Creator | ${keywordsList[0]} ${keywordsList.length > 1 ? '& ' + keywordsList[1] : ''}\n`;
+                        bio += `${relevantEmojis[0]} ${keywordsList.length > 2 ? 'Sharing ' + keywordsList[2] : 'Sharing inspiration'} every day\n`;
+                        bio += `${relevantEmojis[1]} Collabs: youremail@domain.com\n`;
+                        bio += `${relevantEmojis[2]} New content every ${['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][Math.floor(Math.random() * 7)]}`;
+                        break;
+                    case 'minimalist':
+                        bio = `${keywordsList[0]} ${relevantEmojis[0]}\n`;
+                        bio += `${keywordsList.length > 1 ? keywordsList[1] : 'Simplicity'} ${relevantEmojis[1]}\n`;
+                        bio += `${keywordsList.length > 2 ? keywordsList[2] : 'Minimalism'} ${relevantEmojis[2]}`;
+                        break;
+                    case 'funny':
+                        bio = `Professional ${keywordsList[0]} ${keywordsList.length > 1 ? '& ' + keywordsList[1] + ' enthusiast' : 'enthusiast'} ${relevantEmojis[0]}\n`;
+                        bio += `${funnyQuotes[Math.floor(Math.random() * funnyQuotes.length)]} ${relevantEmojis[1]}\n`;
+                        bio += `Warning: May talk about ${keywordsList.length > 2 ? keywordsList[2] : 'random things'} excessively ${relevantEmojis[2]}`;
+                        break;
+                }
+                
+                // Display bio
+                document.getElementById('bio-output').innerHTML = bio.replace(/\n/g, '<br>');
+                document.getElementById('bio-result').style.display = "block";
+                
+                document.getElementById('generate-bio-btn').innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                    </svg>
+                    Create Bio
+                `;
+                
+                // Scroll to result
+                document.getElementById('bio-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 1500);
+        }
+        
+        // Copy functions
+        function copyTags() {
+            const tagText = document.getElementById('tag-output').innerText;
+            navigator.clipboard.writeText(tagText)
+                .then(() => {
+                    const successMsg = document.getElementById('tag-copy-success');
+                    successMsg.style.display = 'block';
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 2000);
+                })
+                .catch(err => {
+                    alert('Failed to copy tags: ' + err);
+                });
+        }
+        
+        function copyBio() {
+            const bioText = document.getElementById('bio-output').innerText;
+            navigator.clipboard.writeText(bioText)
+                .then(() => {
+                    const successMsg = document.getElementById('bio-copy-success');
+                    successMsg.style.display = 'block';
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 2000);
+                })
+                .catch(err => {
+                    alert('Failed to copy bio: ' + err);
+                });
+        }
+        
+        // Quotes arrays
+        const inspirationalQuotes = [
+            "Turn your dreams into reality",
+            "Creating memories, one post at a time",
+            "Living life on my own terms",
+            "The best is yet to come",
+            "Embrace the journey, not just the destination",
+            "Life is short, make it sweet",
+            "Collecting moments, not things",
+            "Be yourself, everyone else is taken",
+            "Chase your dreams, not people"
+        ];
+        
+        const funnyQuotes = [
+            "Professional napper with a side of awesome",
+            "I'm not lazy, I'm on energy-saving mode",
+            "Will work for pizza",
+            "Probably thinking about food right now",
+            "I'm on a seafood diet. I see food and I eat it",
+            "Coffee in one hand, confidence in the other",
+            "I don't always post on Instagram, but when I do...",
+            "Here to avoid friends on Facebook",
+            "Relationship status: Netflix and Wi-Fi"
+        ];
+        
+        // Save video function
+        document.getElementById('save-video-btn').addEventListener('click', function() {
+            alert('In a real implementation, this would download the video to your device. For this demo, please right-click on the video and select "Save video as..."');
+        });
+        
+        // Initialize - set the first tab as active
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add structured data for SEO
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "Instagram Assistant Pro",
+                "description": "The ultimate Instagram toolkit for downloading videos, generating hashtags, and creating bios.",
+                "applicationCategory": "Utility, Social Media Tool",
+                "operatingSystem": "Any",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+            };
+            
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.text = JSON.stringify(structuredData);
+            document.head.appendChild(script);
+        });
+    </script>
+</body>
+</html>
